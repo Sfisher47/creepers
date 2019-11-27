@@ -1,0 +1,97 @@
+<app-header-public></app-header-public>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Register</h2>
+            <form [formGroup]="form" (submit)="onSubmit()">
+                <div class="form-group">
+                    <label for="f-name">Name</label>
+                    <input 
+                    formControlName="name" 
+                    type="text" 
+                    class="form-control" 
+                    [class.is-invalid]="isControlInvalid('name')"
+                    id="f-name">
+                    <div class="invalid-feedback" 
+                    *ngIf="isControlInvalid('name')">
+                        <p *ngIf="form.controls.name.errors.required">The name is required</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-email">Email</label>
+                    <input 
+                    formControlName="email" 
+                    type="text" 
+                    class="form-control" 
+                    [class.is-invalid]="isControlInvalid('email')"
+                    id="f-email">
+                    <div class="invalid-feedback" 
+                    *ngIf="isControlInvalid('email')">
+                        <p *ngIf="form.controls.email.errors.required">The email is required</p>
+                        <p *ngIf="form.controls.email.errors.email">The email is incorrect</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-telephone">Telephone</label>
+                    <input 
+                    formControlName="telephone" 
+                    type="text" 
+                    class="form-control" 
+                    [class.is-invalid]="isControlInvalid('telephone')"
+                    id="f-telephone">
+                    <div class="invalid-feedback" 
+                    *ngIf="isControlInvalid('telephone')">
+                        <p *ngIf="form.controls.telephone.errors.required">The phone is required</p>
+                        <p *ngIf="form.controls.telephone.errors.pattern">The phone is incorrect</p>
+                        <p *ngIf="form.controls.telephone.errors.phone_available">The phone is already use</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-password">Password</label>
+                    <input 
+                    formControlName="password" 
+                    type="password" 
+                    class="form-control"
+                    [class.is-invalid]="isControlInvalid('password')" 
+                    id="f-password">
+                    <div class="invalid-feedback" 
+                    *ngIf="isControlInvalid('password')">
+                        <p *ngIf="form.controls.password.errors.required">The password is required</p>
+                        <p *ngIf="form.controls.password.errors.minLength">The password is too short 6 characters mninimum</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-password-conf">Confirm Password</label>
+                    <input 
+                    formControlName="passwordMatch" 
+                    type="password" 
+                    class="form-control"
+                    [class.is-invalid]="isControlInvalid('passwordMatch')" 
+                    id="f-password-conf">
+                    <div class="invalid-feedback" 
+                    *ngIf="isControlInvalid('password')">
+                        <p *ngIf="form.controls.passwordMatch.errors.required">The password is required</p>
+                        <p *ngIf="form.controls.passwordMatch.errors.minLength">The password is too short 6 characters mninimum</p>
+                        <p *ngIf="form.controls.passwordMatch.errors.password_match">The password is not confirmed</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" style="width:150px" [disabled]="isWorking || form.invalid">
+                        <span class="d-block clearfix">
+                            Register
+                            <i class="spinner-border float-right" *ngIf="isWorking"></i>
+                        </span>
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
