@@ -21,6 +21,7 @@ import { ResponseStatus } from '../models/status.model';
 export class AuthService {
 
     public isAuth: boolean;
+    public checkingAvailable: boolean;
     private account: Account;
 
     private subjectAccount: Subject<Account> = new Subject<Account>();
@@ -95,10 +96,10 @@ export class AuthService {
         );
     }
 
-    checkPhoneAvailable(telephone): Observable<ResponseStatus> {
+    checkPhoneAvailable(telephone): Observable<any> {
         const endpoint = this.urlService.apiRoute('/users/phone/available');
         
-        return this.http.post<ResponseStatus>(endpoint, {telephone})
+        return this.http.post<any>(endpoint, {telephone})
         .pipe(
             catchError(this.httpHandleService.handleError.bind(this.httpHandleService))
         );

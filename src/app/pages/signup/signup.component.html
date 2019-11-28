@@ -15,7 +15,7 @@
                     id="f-name">
                     <div class="invalid-feedback" 
                     *ngIf="isControlInvalid('name')">
-                        <p *ngIf="form.controls.name.errors.required">The name is required</p>
+                        <div *ngIf="form.controls.name.errors.required">The name is required</div>
                     </div>
                 </div>
 
@@ -29,12 +29,12 @@
                     id="f-email">
                     <div class="invalid-feedback" 
                     *ngIf="isControlInvalid('email')">
-                        <p *ngIf="form.controls.email.errors.required">The email is required</p>
-                        <p *ngIf="form.controls.email.errors.email">The email is incorrect</p>
+                        <div *ngIf="form.controls.email.errors.required">The email is required</div>
+                        <div *ngIf="form.controls.email.errors.email">The email is incorrect</div>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group clearfix">
                     <label for="f-telephone">Telephone</label>
                     <input 
                     formControlName="telephone" 
@@ -42,11 +42,22 @@
                     class="form-control" 
                     [class.is-invalid]="isControlInvalid('telephone')"
                     id="f-telephone">
+                    <small class="text-muted" 
+                    *ngIf="authService.checkingAvailable">
+                        <i class="spinner-border" 
+                        style="width: 1rem; height: 1rem"
+                        ></i>
+                        checking phone available.
+                    </small>
                     <div class="invalid-feedback" 
                     *ngIf="isControlInvalid('telephone')">
-                        <p *ngIf="form.controls.telephone.errors.required">The phone is required</p>
-                        <p *ngIf="form.controls.telephone.errors.pattern">The phone is incorrect</p>
-                        <p *ngIf="form.controls.telephone.errors.phone_available">The phone is already use</p>
+                        <div *ngIf="form.controls.telephone.errors.required">The phone is required</div>
+                        <div *ngIf="form.controls.telephone.errors.pattern">The phone is incorrect</div>
+                        <div *ngIf="form.controls.telephone.errors.check_phone_available">The phone is already use</div>
+                    </div>
+                    <div class="d-block valid-feedback" 
+                    *ngIf="form.controls.telephone.valid">
+                        <div><i class="fas fa-check"></i> The phone is available</div>
                     </div>
                 </div>
 
@@ -60,8 +71,8 @@
                     id="f-password">
                     <div class="invalid-feedback" 
                     *ngIf="isControlInvalid('password')">
-                        <p *ngIf="form.controls.password.errors.required">The password is required</p>
-                        <p *ngIf="form.controls.password.errors.minLength">The password is too short 6 characters mninimum</p>
+                        <div *ngIf="form.controls.password.errors.required">The password is required</div>
+                        <div *ngIf="form.controls.password.errors.minlength">The password must 6 characters mninimum</div>
                     </div>
                 </div>
 
@@ -74,10 +85,10 @@
                     [class.is-invalid]="isControlInvalid('passwordMatch')" 
                     id="f-password-conf">
                     <div class="invalid-feedback" 
-                    *ngIf="isControlInvalid('password')">
-                        <p *ngIf="form.controls.passwordMatch.errors.required">The password is required</p>
-                        <p *ngIf="form.controls.passwordMatch.errors.minLength">The password is too short 6 characters mninimum</p>
-                        <p *ngIf="form.controls.passwordMatch.errors.password_match">The password is not confirmed</p>
+                    *ngIf="isControlInvalid('passwordMatch')">
+                        <div *ngIf="form.controls.passwordMatch.errors.required">The password is required</div>
+                        <div *ngIf="form.controls.passwordMatch.errors.minlength">The password must 6 characters mninimum</div>
+                        <div *ngIf="form.controls.passwordMatch.errors.check_password_match">The password is not confirmed</div>
                     </div>
                 </div>
 

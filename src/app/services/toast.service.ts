@@ -13,7 +13,7 @@ export class ToastService {
   title = 'Snotify title!';
   body = 'Lorem ipsum dolor sit amet!';
   timeout = 2000;
-  position: SnotifyPosition = SnotifyPosition.rightTop;
+  position: SnotifyPosition = SnotifyPosition.leftTop;
   progressBar = false;
   closeClick = true;
   newTop = true;

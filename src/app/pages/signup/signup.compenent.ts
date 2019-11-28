@@ -27,10 +27,10 @@ export class SignUpComponent implements OnInit{
   initForm() {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      telephone: ['', Validators.compose([Validators.required, Validators.pattern('[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*')]), checkPhoneAvailableValidator(this.authService)],
+      email: ['', [Validators.required, Validators.email]],
+      telephone: ['', [Validators.required, Validators.pattern('[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*')], checkPhoneAvailableValidator(this.authService)],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      passwordMatch: ['', [Validators.required, Validators.minLength(6), checkPasswordMatchValidator]]
+      passwordMatch: ['', [Validators.required, Validators.minLength(6), checkPasswordMatchValidator('password')]]
     });
   }
 
@@ -55,6 +55,7 @@ export class SignUpComponent implements OnInit{
           return;
         }
 
+        this.toastService.success('Registring success !');
       },
       (err) => {
         this.toastService.error(err);
