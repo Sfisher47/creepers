@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Form, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -16,7 +17,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -44,8 +46,13 @@ export class SignInComponent implements OnInit {
     this.isWorking = true;
     this.authService.onLogin(data).subscribe(
       (account) => {
-        if( this.authService.getAccount() ) {
+        if( account && account.token ) {
           this.toastService.success('Login success !');
+          if(account.profil == 1){
+            this.router.navigate(['/admin']);
+          }
+
+          this.router.navigate(['/contacts']);
         }
         else {
           this.toastService.error('Login fail !!!');
@@ -59,6 +66,5 @@ export class SignInComponent implements OnInit {
       }
     )
   }
-
 
 }

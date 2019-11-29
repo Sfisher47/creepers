@@ -1,0 +1,23 @@
+<ng-container *ngIf="!media.photo_url">
+    <input type="file" class="form-control" (change)="onFileSelect($event)"
+        [class.is-invalid]="isControlInvalid()" id="f-photo">
+    <div class="invalid-feedback" *ngIf="isControlInvalid()">
+        <div *ngIf="errorExt">Available extension *.jpg *.jpeg *.png *.gif *.bmp</div>
+        <div *ngIf="errorSize">The max size is 2M </div>
+    </div>
+    <div class="fa-md text-muted" *ngIf="progress >= 0">
+        {{ progress }} % uploaded
+    </div>
+</ng-container>
+
+<ng-container *ngIf="media.photo_url">
+    <div class="mb-2 d-flex justify-content-center" style="border: 1px dashed #ccc; padding: 10px;">
+        <div style="width: 100px; height: 100px; overflow: hidden;">
+            <img [src]="media.photo_url" alt="photo" style="width: 100%; height: auto;"/>
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger btn-sm clearfix" (click)="onFileDelete()">
+        Delete
+        <i class="spinner-border ml-2" *ngIf="isWorking"></i>
+    </button>
+</ng-container>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { checkPhoneAvailableValidator, checkPasswordMatchValidator } from 'src/app/utils/validator.utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -18,6 +19,7 @@ export class SignUpComponent implements OnInit{
     private fb: FormBuilder,
     private authService: AuthService,
     private toastService: ToastService,
+    private router:Router
   ){}
 
     ngOnInit() {
@@ -56,6 +58,7 @@ export class SignUpComponent implements OnInit{
         }
 
         this.toastService.success('Registring success !');
+        this.router.navigate(['/signin']);
       },
       (err) => {
         this.toastService.error(err);

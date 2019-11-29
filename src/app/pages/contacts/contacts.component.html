@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-12">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <button type="button" class="btn btn-primary mr-1" (click)="openModal()">
+                        Create New
+                    </button>
+                </div>
+                <div class="d-flex">
+                    <select class="mr-1">
+                        <option value="-1">--- select ---</option>
+                        <option value="1">Name</option>
+                        <option value="2">Phone</option>
+                    </select>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-light active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="fas fa-list"></i>
+                        </label>
+                        <label class="btn btn-light">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-th"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table mt-2">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contact of contacts">
+                        <td style="width: 45px;">
+                            <div class="rounded-circle" style="width: 45px; height: 45px; overflow: hidden;">
+                                <a href="javascript:void(0)" class="d-block" (click)="onDisplay(contact)">
+                                    <img [src]="contact.photo ? contact.photo_url : './assets/images/contact.png'" alt="photo" style="width: 100%;">
+                                </a>
+                            </div>
+                        </td>
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.telephone }}</td>
+                        <td>
+                            <app-favorite [contact]="contact"></app-favorite>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="onDelete(contact.id, template)"><i class="fas fa-trash"></i></button>
+                        </td>                     
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4 col-12">
+            <div [@showAnimation]="displayState">
+                <app-contact-single [contact]="currentContact"></app-contact-single>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #template>
+    <div class="modal-body">
+        <p>Are you sure you want to delete it ?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirm()" [disabled]="isWorking">            
+            Yes
+            <i class="spinner-border ml-1" *ngIf="isWorking"></i>                     
+        </button>
+        <button type="button" class="btn btn-danger" (click)="cancel()" [disabled]="isWorking">No</button>
+    </div>
+</ng-template>

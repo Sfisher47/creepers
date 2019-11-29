@@ -1,16 +1,47 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
     <a class="navbar-brand" href="#">Creepers</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" 
+    data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse" id="navbarNav" *ngIf="isAuth">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" routerLinkActive="active">
+                <a routerLink="/contacts"
+                class="nav-link">Contacts</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a routerLink="/users"
+                class="nav-link">Users</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a routerLink="/traces" 
+                class="nav-link">Traces</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a routerLink="/network"
+                class="nav-link">Networks</a>
+            </li>
+        </ul>
+    </div>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item" routerLinkActive="active">
-                <a routerLink="/signin" class="nav-link">SignIn</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a routerLink="/signup" class="nav-link">SignUp</a>
-            </li>
+        <ul class="navbar-nav ml-auto">
+            <ng-container *ngIf="!isAuth">
+                <li class="nav-item" routerLinkActive="active">
+                    <a routerLink="/signin"
+                    class="nav-link">SignIn</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a routerLink="/signup"
+                    class="nav-link">SignUp</a>
+                </li>
+            </ng-container>
+
+            <ng-container *ngIf="isAuth">
+                <li class="nav-item" routerLinkActive="active">
+                    <a href="javascript:void(0)" (click)="onLogout()" class="nav-link">Logout</a>
+                </li>
+            </ng-container>
         </ul>
     </div>
 </nav>

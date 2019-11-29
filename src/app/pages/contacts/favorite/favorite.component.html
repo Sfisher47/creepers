@@ -1,0 +1,7 @@
+<a href="javascript:void(0)" (click)="onLike()" *ngIf="!isWorking">
+    <i class="fas fa-star"
+    [class.text-muted]="!favorite"
+    [class.text-warning]="favorite"></i>
+</a>
+
+<i class="spinner-border" *ngIf="isWorking"></i>
