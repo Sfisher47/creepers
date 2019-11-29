@@ -3,17 +3,26 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, Router, Resolve } from '@a
 import { ContactService } from '../services/contact.service';
 import { Contact } from '../models/contact.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, finalize } from 'rxjs/operators';
 import { ResponseStatus } from '../models/status.model';
+import { AppService } from '../services/app.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GetContactsResolver implements Resolve<Contact[]|ResponseStatus> {
 
-    constructor(private contactService: ContactService) {}
+    constructor(
+      private appService: AppService,
+      private contactService: ContactService
+      ) {}
   
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Contact[]|ResponseStatus> {
-      return this.contactService.list()
+      this.appService.startActivity()
+      return this.contactService.list().pipe(
+        finalize(() => {
+          this.appService.stopActivity();
+        })
+      )
     }
   }

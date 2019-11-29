@@ -27,7 +27,19 @@ export class ApiService {
             headers: new HttpHeaders({
                 'Authorization':  `Bearer ${this.authService.getAccount().token}`
             }),
-            /*params: {limit: ""+limit, offset: ""+offset}*/
+        };
+        return this.http.get<Trace[]|ResponseStatus>(url, httpOptions).pipe(
+            catchError(this.httpHandleService.handleError.bind(this.httpHandleService))
+        );
+    }
+
+
+    getNetworkData() {        
+        const url = this.urlService.apiRoute('/network');
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization':  `Bearer ${this.authService.getAccount().token}`
+            }),
         };
         return this.http.get<Trace[]|ResponseStatus>(url, httpOptions).pipe(
             catchError(this.httpHandleService.handleError.bind(this.httpHandleService))

@@ -23,3 +23,16 @@ import {
         query(':leave', stagger('.3s', [animate('.5s', style({opacity: 0}))] ), { optional: true })
     ])
   ])
+
+  export const fadeInOutAnimation = trigger('fadeInOutAnimation', [
+    transition(':enter', [
+        style({opacity: 0}),
+        animate('.2s', style({opacity: 1}))
+    ]),
+    
+    transition(':leave', [
+      style({opacity: 1}),
+      animate('.2s', style({opacity: 0}))
+    ])
+
+  ])

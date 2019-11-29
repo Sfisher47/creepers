@@ -1,0 +1,52 @@
+.app-activity {
+    position: absolute;
+    display: flex;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+
+    justify-content: center;
+    align-items: center;
+
+
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.app-spinner {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 8px solid #d5d5d5;
+}
+
+.app-spinner::before {
+    content: "";
+    display: block;
+
+    position: relative;
+    top: -8px;
+    left: -8px;
+
+    font-size: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 8px solid #777;
+    border-top: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0)
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

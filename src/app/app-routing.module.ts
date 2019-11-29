@@ -11,6 +11,8 @@ import { ContactFormComponent } from './pages/contacts/form/contact-form.compone
 import { FavoriteComponent } from './pages/contacts/favorite/favorite.component';
 import { ContactSingleComponent } from './pages/contacts/single/contact-single.component';
 import { TracesComponent } from './pages/traces/traces.component';
+import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
+import { NetworkComponent } from './pages/network/network.component';
 
 import {ApiService} from './services/api.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -18,7 +20,7 @@ import { AdminGuard } from './guards/admin.guard';
 
 import { GetContactsResolver } from './resolvers/get-contacts.resolver';
 import { GetTracesResolver } from './resolvers/get-traces.resolver';
-import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
+import { GetNetworkDataResolver } from './resolvers/get-network-data.resolver';
 
 
 const routes: Routes = [
@@ -35,6 +37,12 @@ const routes: Routes = [
     path: 'traces', 
     component: TracesComponent,
     resolve: {traces: GetTracesResolver},
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'network', 
+    component: NetworkComponent,
+    resolve: {data: GetNetworkDataResolver},
     canActivate: [AuthGuard, AdminGuard],
   },
 
@@ -65,7 +73,8 @@ const routes: Routes = [
     SignUpComponent,
     ContactComponent,
     TracesComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    NetworkComponent
 
   ],
   
