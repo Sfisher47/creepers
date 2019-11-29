@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
     constructor(
         private router: Router,
@@ -14,6 +14,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const account = this.authService.getAccount();
+        const isAdmin: boolean = account.profil == 1 ? true : false;
         const isAuth: boolean = (account && account.token) ? true : false;
         
         if(!isAuth) {
@@ -21,6 +22,11 @@ export class AuthGuard implements CanActivate {
             return;
         }
 
-        return isAuth;
+        if(!isAdmin) {
+            this.router.navigate(['/forbidden']);
+            return;
+        }
+
+        return isAuth && isAdmin;
     }
 }
