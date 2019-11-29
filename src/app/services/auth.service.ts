@@ -64,6 +64,18 @@ export class AuthService {
         return account;
     }
 
+    getUser():Observable<any> {        
+        const url = this.urlService.apiRoute('/users/me');
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization':  `Bearer ${this.getAccount().token}`
+            })
+        };
+        return this.http.get<any>(url, httpOptions).pipe(
+            catchError(this.httpHandleService.handleError.bind(this.httpHandleService))
+        );
+    }
+
     onLogin(data: any): Observable<Account> {
         const endpoint = this.urlService.apiRoute('/users/login');
         

@@ -34,5 +34,11 @@ import {
       style({opacity: 1}),
       animate('.2s', style({opacity: 0}))
     ])
+  ])
 
+
+  export const strechAnimation = trigger('strechAnimation', [
+    state('true', style({width: '66.67%'})),
+    state('false', style({width: '100%'})),
+    transition('true <=> false', animate('.3s'))   
   ])

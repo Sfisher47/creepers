@@ -15,6 +15,7 @@ export class HeaderPublicComponent implements OnInit {
   isAuth: boolean;
   isAdmin: boolean;
   account: Account;
+  user: any;
 
   constructor(private authService: AuthService, private router: Router){    
     this.authService.getAccountObservable().subscribe((account: Account) => {
@@ -33,9 +34,18 @@ export class HeaderPublicComponent implements OnInit {
       this.router.navigate(['/signin'])
       return;
     }
+
     this.isAuth = true;
     this.account = account;
     this.isAdmin = this.account.profil == 1 ? true : false;
+
+    this.authService.getUser().subscribe(
+      (res) => {
+        if(res.code) return;
+
+        this.user = res;
+      }
+    )
   }
 
   onLogout() {

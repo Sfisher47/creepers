@@ -19,11 +19,9 @@ export class AppService {
 
     startActivity() {
         this.isActivity = true;
-        console.log(this.isActivity);
     }
 
     stopActivity() {
         this.isActivity = false;
-        console.log(this.isActivity);
     }
 }

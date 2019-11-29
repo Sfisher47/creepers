@@ -6,4 +6,6 @@
     </div>
 </div>
 
-<router-outlet></router-outlet>
+<div [hidden]="appService.isActivity">
+    <router-outlet></router-outlet>
+</div>

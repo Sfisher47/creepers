@@ -7,7 +7,7 @@ import { ContactService } from 'src/app/services/contact.service';
 import { ResponseStatus } from 'src/app/models/status.model';
 import { ToastService } from 'src/app/services/toast.service';
 
-import { showAnimation, listAnimation } from 'src/app/utils/animations.utils';
+import { showAnimation } from 'src/app/utils/animations.utils';
 
 
 
@@ -15,7 +15,7 @@ import { showAnimation, listAnimation } from 'src/app/utils/animations.utils';
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss'],
-  animations: [showAnimation, listAnimation]
+  animations: [showAnimation]
 })
 export class ContactComponent implements OnInit{
 
@@ -27,6 +27,7 @@ export class ContactComponent implements OnInit{
   currentContact: Contact;
   isWorking: boolean;
   isRefresh: boolean;
+  switchDisplay: boolean;
 
   displayState: string = 'close';
 
@@ -66,6 +67,11 @@ export class ContactComponent implements OnInit{
   onDelete(id: number, template: TemplateRef<any>) {
     this.contactId = id;
     this.dialogueRef = this.modalService.show(template);
+  }
+
+  onToggleDisplay() {
+    this.switchDisplay = !this.switchDisplay;
+    console.log(this.switchDisplay);
   }
 
   confirm() {
