@@ -6,6 +6,6 @@
     </div>
 </div>
 
-<div [hidden]="appService.isActivity">
-    <router-outlet></router-outlet>
+<div class="main" [hidden]="appService.isActivity" [@routerFadeInOutAnimation]="doRouterFadeInOutAnimation(myOutlet)">
+    <router-outlet #myOutlet="outlet"></router-outlet> 
 </div>

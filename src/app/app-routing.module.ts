@@ -24,8 +24,8 @@ import { GetNetworkDataResolver } from './resolvers/get-network-data.resolver';
 
 
 const routes: Routes = [
-  {path: 'signin', component: SignInComponent},
-  {path: 'signup', component: SignUpComponent},
+  {path: 'signin', component: SignInComponent, data: {page: 'signin'}},
+  {path: 'signup', component: SignUpComponent, data: {page: 'signup'}},
   { path: 'forbidden', component: ForbiddenComponent },
   {
     path: 'contacts', 

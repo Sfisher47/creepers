@@ -55,10 +55,14 @@ export class ContactFormComponent {
       } as Contact;
   
       this.isWorking = true;
+      this.form.controls.telephone.setErrors(null);
       this.contactService.create(contact).subscribe(
         (res) => {
           if(res.code) {
             this.toastService.error('Operation fail !!!');
+            if(res.contact_exists) {
+              this.form.controls.telephone.setErrors({'contact_exists': true})
+            }
             return;
           }
 

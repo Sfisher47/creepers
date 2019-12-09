@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Account } from 'src/app/models/account.model';
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/services/app.service';
 
 
 @Component({
@@ -17,7 +18,11 @@ export class HeaderPublicComponent implements OnInit {
   account: Account;
   user: any;
 
-  constructor(private authService: AuthService, private router: Router){    
+  constructor(
+    private appService: AppService,
+    private authService: AuthService, 
+    private router: Router
+    ){    
     this.authService.getAccountObservable().subscribe((account: Account) => {
       this._checkAccount(account);
     })
@@ -41,7 +46,7 @@ export class HeaderPublicComponent implements OnInit {
 
     this.authService.getUser().subscribe(
       (res) => {
-        if(res.code) return;
+        if(res && res.code) return;
 
         this.user = res;
       }
@@ -50,6 +55,10 @@ export class HeaderPublicComponent implements OnInit {
 
   onLogout() {
     this.authService.onLogout()
+    this.appService.startActivity();
+    setTimeout(() => {
+      this.appService.stopActivity()
+    }, 300);
   }
 
   onGoToSignin() {

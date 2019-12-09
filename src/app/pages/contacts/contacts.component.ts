@@ -45,16 +45,16 @@ export class ContactComponent implements OnInit{
 
   refresh() {
     this.isRefresh = true;
-    this.contactService.list().subscribe(
-      (res) => {
+    this.contactService.list()
+    .subscribe({
+      next: (res) => {
         if(res instanceof ResponseStatus && res.code) return;
         this.contacts = res as Contact[]; 
       },
-      () => {},
-      () => {
+      complete: () => {
         this.isRefresh = false;
       }
-    )
+    });
   }
 
   onDisplay(contact: Contact) {

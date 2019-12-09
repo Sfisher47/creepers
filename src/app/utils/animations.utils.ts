@@ -6,6 +6,8 @@ import {
     transition,
     query,
     stagger,
+    group,
+    sequence,
     // ...
   } from '@angular/animations';
 
@@ -36,9 +38,20 @@ import {
     ])
   ])
 
-
   export const strechAnimation = trigger('strechAnimation', [
     state('true', style({width: '66.67%'})),
     state('false', style({width: '100%'})),
     transition('true <=> false', animate('.3s'))   
+  ])
+
+  export const routerFadeInOutAnimation = trigger('routerFadeInOutAnimation', [    
+    transition('* => *', [
+      query(':enter', [style({opacity: 0})], {optional: true}),
+      query(':enter, :leave', [style({position:'absolute', left:0, right:0})], {optional: true}),
+      sequence([
+        query(':leave', [style({opacity: 0}), animate( '.2s', style({opacity: 0}))], {optional: true}),
+        query(':enter', [style({opacity: 0}), animate( '.2s', style({opacity: 1}))], {optional: true}), 
+      ])
+      
+    ])
   ])

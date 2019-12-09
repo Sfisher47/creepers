@@ -4,7 +4,8 @@ import { Trace } from 'src/app/models/trace.model';
 
 @Component({
   selector: 'app-forbidden',
-  templateUrl: './forbidden.component.html'
+  templateUrl: './forbidden.component.html',
+  styleUrls: ['./forbidden.component.scss']
 })
 export class ForbiddenComponent implements OnInit {
 

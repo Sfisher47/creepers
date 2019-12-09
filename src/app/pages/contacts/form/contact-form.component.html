@@ -35,6 +35,7 @@
         <div class="invalid-feedback" *ngIf="isControlInvalid('telephone')">
             <div *ngIf="form.controls.telephone.errors.required">The phone is required</div>
             <div *ngIf="form.controls.telephone.errors.pattern">The phone is incorrect</div>
+            <div *ngIf="form.controls.telephone.errors.contact_exists">You have already contact registered with this phone number</div>
         </div>
     </div>
 

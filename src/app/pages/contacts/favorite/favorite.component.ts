@@ -26,6 +26,7 @@ export class FavoriteComponent implements OnInit {
         this.contactService.read(this.contact.id).subscribe(
             (res) => {
                 this.isWorking = false;
+                this.contact.favorite = res.favorite;
                 this.favorite = res.favorite;
             }
         )
