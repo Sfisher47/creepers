@@ -18,3 +18,19 @@
 .rounded-circle.avatar:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+
+.btn-del {
+    font-size:12px;
+    height: 32px;
+    min-width: 30px;
+}
+
+.text-overflow {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.box-overflow-hidden {
+    overflow: hidden;
+}

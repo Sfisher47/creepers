@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { checkPhoneAvailableValidator, checkPasswordMatchValidator } from 'src/app/utils/validator.utils';
-import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-signup',
@@ -17,13 +21,14 @@ export class SignUpComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    public authService: AuthService,
     private toastService: ToastService,
     private router:Router
   ){}
 
     ngOnInit() {
-      this.initForm()
+      this.initForm();
+      document.querySelector('body').setAttribute('class', 'bg-blue');
     }
 
   initForm() {
@@ -50,7 +55,11 @@ export class SignUpComponent implements OnInit{
     }
 
     this.isWorking = true;
-    this.authService.onRegister(data).subscribe(
+    this.authService.onRegister(data)
+    .pipe(finalize(() => {
+      this.isWorking = false;
+    }))
+    .subscribe(
       (response) => {
         if( response.code ) {
           this.toastService.error('Registring fail !!!');
@@ -62,10 +71,11 @@ export class SignUpComponent implements OnInit{
       },
       (err) => {
         this.toastService.error(err);
-      },
-      () => {
-        this.isWorking = false;
       }
     )
+  }
+
+  ngOnDestroy() {
+    document.querySelector('body').setAttribute('class', '');
   }
 }

@@ -32,39 +32,45 @@ export class NetworkComponent implements OnInit {
     this.data.forEach((item, index, array) => {
 
         let contact = contactNodes.find( (n) => {
-            return n.label === item.telephone;
+            return n.ref === item.telephone;
         });
 
         let user = usersNodes.find( (n) => {
-            return n.label === item.user.name;
+            return n.ref === item.user.id;
         });
 
         if(!contact) {
             contact = {
                 id: index,
-                label: item.telephone,
-                shape: 'icon',
-                icon: {
-                    face: "'Font Awesome 5 Pro'",
-                    weight: "bold",
-                    code: '\uf095',
-                    size: 50,
-                    color: '#555'
-                }
+                ref: item.telephone,
+                names: [item.name],
+                label: `<${item.name}>\n${item.telephone}`,
+                shape: 'circularImage',                
+                physics: false,
+                image: {
+                  selected: item.photo_url,
+                  unselected: item.photo_url
+                },
             };
             contactNodes.push(contact);
+        }
+        else {
+          contact.names.push(item.name);
+          contact.label = contact.names.map(x => '<'+ x +'>').join(' | ') + '\n' + contact.ref;
         }
 
         if(!user) {
             user = {
                 id: array.length + index,
-                label: item.user.name,
+                ref: item.user.id,
+                label: `\n<${item.user.name}>\n${item.user.telephone}`,
                 shape: 'icon',
+                physics: false,
                 icon: {
                     face: "'Font Awesome 5 Pro'",
                     weight: "bold",
                     code: '\uf007',
-                    size: 50,
+                    size: 30,
                     color: '#555'
                 }
             };
@@ -87,6 +93,8 @@ export class NetworkComponent implements OnInit {
 
     // create a network
     var container = document.getElementById('network');
+    container.style.height = `${window.innerHeight - 123}px`;
+
     var data = {
       nodes: nodes,
       edges: edges
@@ -94,7 +102,7 @@ export class NetworkComponent implements OnInit {
 
     var options = {
       height: '100%',
-      width: '100%'
+      width: '100%',
     };
 
     var network = new vis.Network(container, data, options);

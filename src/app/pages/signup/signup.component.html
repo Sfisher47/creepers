@@ -1,110 +1,124 @@
-<section class="main">
-<div class="container border border-radius-xs bg-white p-4 mt-5" style="width: 600px;">
-    <div class="row">
-        <div class="col">            
-            <h2 class="mb-3">Register</h2>
-            <hr class="mb-4">
+<section class="main pt-5">
+    <h1 class="mb-3 text-center text-white mb-4">Creepers</h1>
+    <div class="container border border-radius-xs bg-white p-4" style="width: 450px;">
+        <div class="row">
+            <div class="col">            
+                    <p class="mb-3 text-center">Sing up now for free and enjoy all services of <span class="h-text-0">creepers</span></p>
+                <hr class="mb-4">
 
-            <form [formGroup]="form" (submit)="onSubmit()">
-                <div class="form-group">
-                    <label for="f-name">Name</label>
-                    <input 
-                    formControlName="name" 
-                    type="text" 
-                    class="form-control" 
-                    [class.is-invalid]="isControlInvalid('name')"
-                    id="f-name">
-                    <div class="invalid-feedback" 
-                    *ngIf="isControlInvalid('name')">
-                        <div *ngIf="form.controls.name.errors.required">The name is required</div>
+                <form [formGroup]="form" (submit)="onSubmit()">
+                    <div class="form-group">
+                        <!--<label for="f-name">Name</label>-->
+                        <input 
+                        formControlName="name" 
+                        type="text" 
+                        class="form-control"
+                        placeholder="Name"
+                        [class.is-invalid]="isControlInvalid('name')"
+                        id="f-name">
+                        <div class="invalid-feedback" 
+                        *ngIf="isControlInvalid('name')">
+                            <div *ngIf="form.controls.name.errors.required">The name is required</div>
+                        </div>
                     </div>
+
+                    <div class="form-group">
+                        <!--<label for="f-email">Email</label>-->
+                        <input 
+                        formControlName="email" 
+                        type="text" 
+                        class="form-control"
+                        placeholder="Email"
+                        [class.is-invalid]="isControlInvalid('email')"
+                        id="f-email">
+                        <div class="invalid-feedback" 
+                        *ngIf="isControlInvalid('email')">
+                            <div *ngIf="form.controls.email.errors.required">The email is required</div>
+                            <div *ngIf="form.controls.email.errors.email">The email is incorrect</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group clearfix">
+                        <!--<label for="f-telephone">Telephone</label>-->
+                        <input 
+                        formControlName="telephone" 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Phone number"
+                        [class.is-invalid]="isControlInvalid('telephone')"
+                        id="f-telephone">
+                        <small class="text-muted" 
+                        *ngIf="authService.checkingAvailable">
+                            <i class="spinner-border" 
+                            style="width: 1rem; height: 1rem"
+                            ></i>
+                            checking phone available.
+                        </small>
+                        <div class="invalid-feedback" 
+                        *ngIf="isControlInvalid('telephone')">
+                            <div *ngIf="form.controls.telephone.errors.required">The phone is required</div>
+                            <div *ngIf="form.controls.telephone.errors.pattern">The phone is incorrect</div>
+                            <div *ngIf="form.controls.telephone.errors.check_phone_available">The phone is already use</div>
+                        </div>
+                        <div class="d-block valid-feedback" 
+                        *ngIf="form.controls.telephone.valid">
+                            <div class="text-success"><i class="fas fa-check"></i> The phone is available</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!--<label for="f-password">Password</label>-->
+                        <input 
+                        formControlName="password" 
+                        type="password" 
+                        class="form-control"
+                        placeholder="Password"
+                        [class.is-invalid]="isControlInvalid('password')" 
+                        id="f-password">
+                        <div class="invalid-feedback" 
+                        *ngIf="isControlInvalid('password')">
+                            <div *ngIf="form.controls.password.errors.required">The password is required</div>
+                            <div *ngIf="form.controls.password.errors.minlength">The password must 6 characters mninimum</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!--<label for="f-password-conf">Confirm Password</label>-->
+                        <input 
+                        formControlName="passwordMatch" 
+                        type="password" 
+                        class="form-control"
+                        placeholder="Confirm password"
+                        [class.is-invalid]="isControlInvalid('passwordMatch')" 
+                        id="f-password-conf">
+                        <div class="invalid-feedback" 
+                        *ngIf="isControlInvalid('passwordMatch')">
+                            <div *ngIf="form.controls.passwordMatch.errors.required">The password is required</div>
+                            <div *ngIf="form.controls.passwordMatch.errors.minlength">The password must 6 characters mninimum</div>
+                            <div *ngIf="form.controls.passwordMatch.errors.check_password_match">The password is not confirmed</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block" [disabled]="isWorking || form.invalid">
+                            <span class="d-block clearfix">
+                                Create your account
+                                <i class="spinner-border float-right" *ngIf="isWorking"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+
+
+                <div>
+                    <p class="text-sm or-separator">or</p>
+
+                    <p class="text-sm text-center">If you already have account you can <a routerLink="/signin">sign in here</a></p>
                 </div>
 
-                <div class="form-group">
-                    <label for="f-email">Email</label>
-                    <input 
-                    formControlName="email" 
-                    type="text" 
-                    class="form-control" 
-                    [class.is-invalid]="isControlInvalid('email')"
-                    id="f-email">
-                    <div class="invalid-feedback" 
-                    *ngIf="isControlInvalid('email')">
-                        <div *ngIf="form.controls.email.errors.required">The email is required</div>
-                        <div *ngIf="form.controls.email.errors.email">The email is incorrect</div>
-                    </div>
-                </div>
 
-                <div class="form-group clearfix">
-                    <label for="f-telephone">Telephone</label>
-                    <input 
-                    formControlName="telephone" 
-                    type="text" 
-                    class="form-control" 
-                    [class.is-invalid]="isControlInvalid('telephone')"
-                    id="f-telephone">
-                    <small class="text-muted" 
-                    *ngIf="authService.checkingAvailable">
-                        <i class="spinner-border" 
-                        style="width: 1rem; height: 1rem"
-                        ></i>
-                        checking phone available.
-                    </small>
-                    <div class="invalid-feedback" 
-                    *ngIf="isControlInvalid('telephone')">
-                        <div *ngIf="form.controls.telephone.errors.required">The phone is required</div>
-                        <div *ngIf="form.controls.telephone.errors.pattern">The phone is incorrect</div>
-                        <div *ngIf="form.controls.telephone.errors.check_phone_available">The phone is already use</div>
-                    </div>
-                    <div class="d-block valid-feedback" 
-                    *ngIf="form.controls.telephone.valid">
-                        <div class="text-success"><i class="fas fa-check"></i> The phone is available</div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="f-password">Password</label>
-                    <input 
-                    formControlName="password" 
-                    type="password" 
-                    class="form-control"
-                    [class.is-invalid]="isControlInvalid('password')" 
-                    id="f-password">
-                    <div class="invalid-feedback" 
-                    *ngIf="isControlInvalid('password')">
-                        <div *ngIf="form.controls.password.errors.required">The password is required</div>
-                        <div *ngIf="form.controls.password.errors.minlength">The password must 6 characters mninimum</div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="f-password-conf">Confirm Password</label>
-                    <input 
-                    formControlName="passwordMatch" 
-                    type="password" 
-                    class="form-control"
-                    [class.is-invalid]="isControlInvalid('passwordMatch')" 
-                    id="f-password-conf">
-                    <div class="invalid-feedback" 
-                    *ngIf="isControlInvalid('passwordMatch')">
-                        <div *ngIf="form.controls.passwordMatch.errors.required">The password is required</div>
-                        <div *ngIf="form.controls.passwordMatch.errors.minlength">The password must 6 characters mninimum</div>
-                        <div *ngIf="form.controls.passwordMatch.errors.check_password_match">The password is not confirmed</div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block" [disabled]="isWorking || form.invalid">
-                        <span class="d-block clearfix">
-                            Register
-                            <i class="spinner-border float-right" *ngIf="isWorking"></i>
-                        </span>
-                    </button>
-                </div>
-            </form>
-
-
+            </div>
         </div>
     </div>
-</div>
+    <p class="text-center text-xs text-white m-0 py-4">Copyright &copy; 2019</p>
 </section>

@@ -1,16 +1,18 @@
-<section class="main">
-    <div class="container border border-radius-xs bg-white p-4 mt-5" style="width: 400px;">
+<section class="main pt-5">
+    <h1 class="mb-3 text-center text-white mb-4">Creepers</h1>
+    <div class="container border border-radius-xs bg-white p-4" style="width: 450px;">
         <div class="row">
             <div class="col">
-                <h2 class="mb-3">Connexion</h2>
+                <p class="mb-3 text-center">Sing in for continue to use <span class="h-text-0">creepers</span></p>
                 <hr class="mb-4">
                 <form [formGroup]="form" (submit)="onSubmit()">
                     <div class="form-group">
-                        <label for="f-telephone">Telephone</label>
+                        <!--<label for="f-telephone">Telephone</label>-->
                         <input 
                         formControlName="telephone" 
                         type="text" 
-                        class="form-control" 
+                        class="form-control"
+                        placeholder="Phone number"
                         [class.is-invalid]="isControlInvalid('telephone')"
                         id="f-telephone">
                         <div class="invalid-feedback" 
@@ -19,11 +21,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="f-password">Password</label>
+                        <!--<label for="f-password">Password</label>-->
                         <input 
                         formControlName="password" 
                         type="password" 
                         class="form-control"
+                        placeholder="Password"
                         [class.is-invalid]="isControlInvalid('password')" 
                         id="f-password">
                         <div class="invalid-feedback" 
@@ -35,7 +38,7 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block" [disabled]="isWorking || form.invalid">
                             <span class="d-block clearfix">
-                                Sign in
+                                Let's Go !
                                 <i class="spinner-border float-right" *ngIf="isWorking"></i>
                             </span>
                         </button>
@@ -43,7 +46,13 @@
                 </form>
 
 
+                <div>
+                    <p class="text-sm or-separator">or</p>
+    
+                    <p class="text-sm text-center">If you don't have account you can <a routerLink="/signup">sign up here</a></p>
+                </div>
             </div>
         </div>
     </div>
+    <p class="text-center text-xs text-white m-0 py-4">Copyright &copy; 2019</p>
 </section>

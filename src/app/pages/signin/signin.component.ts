@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, Form, Validators, FormGroup } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -22,7 +24,8 @@ export class SignInComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initForm()
+    this.initForm();
+    document.querySelector('body').setAttribute('class', 'bg-blue');
   }
 
   initForm() {
@@ -44,15 +47,20 @@ export class SignInComponent implements OnInit {
     }
 
     this.isWorking = true;
-    this.authService.onLogin(data).subscribe(
+    this.authService.onLogin(data)
+    .pipe(finalize(() => {
+      this.isWorking = false;
+    }))
+    .subscribe(
       (account) => {
         if( account && account.token ) {
           this.toastService.success('Login success !');
           if(account.profil == 1){
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/network'], {replaceUrl:true});
+			return;
           }
 
-          this.router.navigate(['/contacts']);
+          this.router.navigate(['/contacts'], {replaceUrl:true});
         }
         else {
           this.toastService.error('Login fail !!!');
@@ -60,11 +68,12 @@ export class SignInComponent implements OnInit {
       },
       (err) => {
         this.toastService.error(err);
-      },
-      () => {
-        this.isWorking = false;
       }
     )
+  }
+
+  ngOnDestroy() {
+    document.querySelector('body').setAttribute('class', '');
   }
 
 }

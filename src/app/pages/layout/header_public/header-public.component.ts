@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
-import { Account } from 'src/app/models/account.model';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { AuthService } from 'src/app/services/auth.service';
 import { AppService } from 'src/app/services/app.service';
+import { Account } from 'src/app/models/account.model';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class HeaderPublicComponent implements OnInit {
   isAdmin: boolean;
   account: Account;
   user: any;
+
+  isCollapsed: boolean;
 
   constructor(
     private appService: AppService,

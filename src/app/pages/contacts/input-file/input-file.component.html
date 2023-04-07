@@ -1,6 +1,6 @@
 <ng-container *ngIf="!media.photo_url">
     <input type="file" class="form-control" (change)="onFileSelect($event)"
-        [class.is-invalid]="isControlInvalid()" id="f-photo" [disabled]="progress > 0" style="height: auto;">
+        [class.is-invalid]="isControlInvalid()" id="f-photo" [disabled]="progress > 0" style="padding-top: 8px;">
     <div class="invalid-feedback" *ngIf="isControlInvalid()">
         <div *ngIf="errorExt">Available extension *.jpg *.jpeg *.png *.gif *.bmp</div>
         <div *ngIf="errorSize">The max size is 2M </div>

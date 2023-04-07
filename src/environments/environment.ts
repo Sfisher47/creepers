@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 };
 
-export const SERVEUR_URL = 'http://localhost:8000'
+export const SERVEUR_URL = 'http://localhost:8080'
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { finalize } from 'rxjs/operators';
 
 import { ToastService } from 'src/app/services/toast.service';
 import { ContactService } from 'src/app/services/contact.service';
@@ -56,7 +57,10 @@ export class ContactFormComponent {
   
       this.isWorking = true;
       this.form.controls.telephone.setErrors(null);
-      this.contactService.create(contact).subscribe(
+      this.contactService.create(contact)
+      .pipe(finalize(() => {
+        this.isWorking = false;
+      })).subscribe(
         (res) => {
           if(res.code) {
             this.toastService.error('Operation fail !!!');
@@ -72,9 +76,6 @@ export class ContactFormComponent {
         },
         (err) => {
           this.toastService.error(err);
-        },
-        () => {
-          this.isWorking = false;
         }
       )
     }

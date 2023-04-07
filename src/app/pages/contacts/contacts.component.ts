@@ -24,6 +24,7 @@ export class ContactComponent implements OnInit{
 
   contactId: number;
   contacts: Contact[];
+  xContacts: Contact[];
   currentContact: Contact;
   isWorking: boolean;
   isRefresh: boolean;
@@ -40,7 +41,8 @@ export class ContactComponent implements OnInit{
   }  
    
   ngOnInit() {
-    this.contacts = this.route.snapshot.data['contacts'];
+    this.xContacts = this.route.snapshot.data['contacts'];
+    this.contacts = this.xContacts.slice();
   }
 
   refresh() {
@@ -69,9 +71,29 @@ export class ContactComponent implements OnInit{
     this.dialogueRef = this.modalService.show(template);
   }
 
+  onSort(by:number) {
+    if(by == -1) {
+      this.contacts = this.xContacts.slice();
+    }
+    else if(by == 1) {
+      this.contacts = this.contacts.sort((a, b) => {
+        if(a.name > b.name) return 1;
+        if(a.name < b.name) return -1;
+        return 0;
+      })
+    }
+    else if(by == 2) {
+      this.contacts = this.contacts.sort((a, b) => {
+        if(a.telephone > b.telephone) return 1;
+        if(a.telephone < b.telephone) return -1;
+        return 0;
+      })
+    }
+
+  }
+
   onToggleDisplay() {
     this.switchDisplay = !this.switchDisplay;
-    console.log(this.switchDisplay);
   }
 
   confirm() {

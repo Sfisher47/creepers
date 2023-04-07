@@ -18,8 +18,9 @@
                             <i class="fas fa-plus-circle"></i> Create New
                         </button>
                     </div>
-                    <div class="d-flex">
-                        <select class="mr-1">
+                    <div class="d-flex align-items-center">
+                        Sort by: &nbsp;
+                        <select class="mr-1 h-100" (change)="onSort($event.target.value)">
                             <option value="-1">--- select ---</option>
                             <option value="1">Name</option>
                             <option value="2">Phone</option>
@@ -39,46 +40,48 @@
 
                 <ng-container *ngIf="!switchDisplay">
                     <div class="card mt-2 px-2 pb-2">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Contact</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="text-sm" *ngFor="let contact of contacts">
-                                    <td style="width: 45px;">
-                                        <div class="rounded-circle avatar">
-                                            <a href="javascript:void(0)" class="d-block" (click)="onDisplay(contact)">
-                                                <img [src]="contact.photo ? contact.photo_url : './assets/images/contact.png'" alt="photo" style="width: 100%;">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>{{ contact.name }}</td>
-                                    <td>{{ contact.email }}</td>
-                                    <td>{{ contact.telephone }}</td>
-                                    <td>
-                                        <app-favorite [contact]="contact"></app-favorite>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm" (click)="onDelete(contact.id, template)"><i class="fas fa-trash"></i></button>
-                                    </td>                     
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Contact</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-sm" *ngFor="let contact of contacts">
+                                        <td style="width: 45px;">
+                                            <div class="rounded-circle avatar">
+                                                <a href="javascript:void(0)" class="d-block" (click)="onDisplay(contact)">
+                                                    <img [src]="contact.photo ? contact.photo_url : './assets/images/contact.png'" alt="photo" style="width: 100%;">
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ contact.name }}</td>
+                                        <td>{{ contact.email }}</td>
+                                        <td>{{ contact.telephone }}</td>
+                                        <td>
+                                            <app-favorite [contact]="contact"></app-favorite>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-del" (click)="onDelete(contact.id, template)"><i class="fas fa-trash"></i></button>
+                                        </td>                     
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </ng-container>
 
                 <ng-container *ngIf="switchDisplay">
                     <div class="row mt-2">
                         <!---->
-                        <div class="col-3" *ngFor="let contact of contacts">
-                            <div class="border border-radius-xs bg-white p-3">
+                        <div class="col-3 mb-2" *ngFor="let contact of contacts">
+                            <div class="border border-radius-xs box-overflow-hidden bg-white p-3">
                                 <div class="d-flex">
                                     <div class="rounded-circle" style="width: 45px; height: 45px; overflow: hidden;">
                                         <a href="javascript:void(0)" class="d-block">
@@ -98,7 +101,7 @@
                             
                                 <div class="d-flex text-sm py-2">
                                     <div class="mr-4"><i class="fas fa-envelope"></i></div>
-                                    <div>{{ contact?.email }}</div>
+                                    <div class="text-overflow">{{ contact?.email }}</div>
                                 </div>
 
                                 <div class="d-flex justify-content-end">

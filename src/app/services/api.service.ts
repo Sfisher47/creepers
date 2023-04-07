@@ -46,7 +46,16 @@ export class ApiService {
         );
     }
 
-
-    
+    getUsers() {        
+        const url = this.urlService.apiRoute('/users');
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization':  `Bearer ${this.authService.getAccount().token}`
+            })
+        };
+        return this.http.get<any>(url, httpOptions).pipe(
+            catchError(this.httpHandleService.handleError.bind(this.httpHandleService))
+        );
+    }   
 
 }

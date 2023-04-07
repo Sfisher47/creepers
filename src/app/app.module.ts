@@ -10,6 +10,7 @@ import {CookieService} from 'ngx-cookie-service';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import { AppCommonModule } from './app-common.module';
@@ -30,6 +31,7 @@ import { ContactFormComponent } from './pages/contacts/form/contact-form.compone
 
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
+    CollapseModule.forRoot()
   ],
   providers: [
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},

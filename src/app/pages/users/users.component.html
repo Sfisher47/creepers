@@ -1,0 +1,42 @@
+<section class="main">
+    <section class="component-header border-bottom py-3 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <h3 class="component-title m-0">Users</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 smooth-strech">
+                <div class="card mt-2 px-2 pb-2">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <ng-container *ngFor="let item of users">                               
+                                    <tr class="text-sm" *ngIf="myId != item.id">
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.email }}</td>
+                                        <td>{{ item.telephone }}</td>                   
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

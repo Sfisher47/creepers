@@ -1,6 +1,7 @@
 
-body {
+html, body {
   background-color: #f8f8f8;
+  min-height: 100vh;
 }
 
 .spinner-border {
@@ -53,7 +54,48 @@ body {
 }
 
 div, p, h1, h2, h3, h4 {
+  font-family: Poppins, Arial, Helvetica, sans-serif;
   color: #555
+}
+
+.btn, 
+input[type="text"], 
+input[type="password"],
+input[type="file"] {
+  height: 48px;
+}
+
+input[type="text"]::placeholder, 
+input[type="password"]::placeholder,
+input[type="file"]::placeholder {
+  font-weight: 200;
+}
+
+input[type="text"]:active, input[type="text"]:focus, 
+input[type="password"]:active, input[type="password"]:focus,
+input[type="file"]:active, input[type="file"]:focus {
+  border: 1px solid #0069FF;
+  box-shadow: none;
+}
+
+input[type="text"]:active.is-invalid, input[type="text"]:focus.is-invalid, 
+input[type="password"]:active.is-invalid, input[type="password"]:focus.is-invalid,
+input[type="file"]:active.is-invalid, input[type="file"]:focus.is-invalid {
+  box-shadow: none;
+}
+
+.btn-primary {
+  background-color: #0069FF;
+}
+
+.btn-primary:disabled,
+.btn-primary:hover:disabled {
+  cursor: not-allowed;
+  background-color: #0069FF;
+}
+
+.btn-primary:hover {
+  background-color: #1633FF;
 }
 
 .invalid-feedback div,
@@ -61,8 +103,17 @@ div, p, h1, h2, h3, h4 {
   color: #dc3545;
 }
 
+.nav-bg-primary {
+  background-color: #031B4E;
+}
+
+.h-text-0{
+  font-weight: bold;
+  color: #031B4E;
+}
+
 .text-xs {
-  font-size: 0.40rem
+  font-size: 0.65rem
 }
 
 .text-sm {
@@ -83,6 +134,10 @@ div, p, h1, h2, h3, h4 {
 
 .bg-gray {
   background-color: #f0f0f0;
+}
+
+.bg-blue {
+  background-color: #0049FF;
 }
 
 table {

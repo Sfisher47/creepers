@@ -1,0 +1,27 @@
+.container {
+    /*box-shadow: 0 10px 20px rgba(3,27,78,.1);*/
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.25rem 0.25rem;
+}
+
+.or-separator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.or-separator::before,
+.or-separator::after  {
+    content: "";
+    flex: 1;
+    font-size: 0;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.or-separator::before {
+    margin-right: 15px;
+}
+
+.or-separator::after {
+    margin-left: 15px;
+}
